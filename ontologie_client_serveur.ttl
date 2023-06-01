@@ -1,0 +1,16 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <>.
+:IPv4 :est_une_implementation_32bits :IP .
+:IPv6 :est_une_implementation_64bits :IP .
+:IP :se_base :TCP .
+:TCP rdf:type :Protocole .
+
+:GET :est_un_verbe :Requête .
+:POST :est_un_verbe :Requête .
+:Requête :est_émise :HTTP .
+:HTTP rdf:type :Protocole .
+:200 :est_un_code_retour :Réponse .
+:404 :est_un_code_retour :Réponse .
+:Réponse :est_retournée :HTTP .
+
+:Protocole :utilise :Réseau
