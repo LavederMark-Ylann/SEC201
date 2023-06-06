@@ -2,7 +2,8 @@
 graph LR
     Protocole -- utilise --> Réseau
     TCP -- est_un_type --> Protocole
-    IP -- se_base --> TCP
+    IP -- peut_utiliser --> TCP
+    IP -- est_un_type --> Protocole
     IPv4 -- est_une_implémentation_32bits --> IP
     IPv6 -- est_une_implémentation_64bits --> IP
     HTTP -- est_un_type --> Protocole
@@ -15,16 +16,15 @@ graph LR
 
     Équipement -- est_connecté --> Réseau
     Routage -- est_un_type --> Équipement
-    Switch -- s'occupe --> Routage
+    Switch -- est_chargé --> Routage
     Sécurité -- est_un_type --> Équipement
-    Pare-feu -- s'occupe --> Sécurité
+    Pare-feu -- est_chargé --> Sécurité
 
-    Léger -- est_un_type --> Client
-    Navigateur[Navigateur web] -- est_un_type --> Léger
+    Navigateur[Navigateur web] -- est_un_type --> Client
     Chrome -- est --> Navigateur
     Firefox -- est --> Navigateur
-    Lourd -- est_un_type --> Client
-    Logiciel -- est_un_type --> Lourd
+    Logiciel -- est_un_type --> Client
+    Client --> Réseau
 
     Frontal[Serveur web] -- est_un_type --> Serveur
     IIS -- est --> Frontal
@@ -35,5 +35,6 @@ graph LR
     Cache[Serveur cache] -- est_un_type --> Serveur
     Redis -- est --> Cache
     Memcached -- est --> Cache
+    Serveur --> Réseau
 
 ```

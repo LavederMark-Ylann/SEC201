@@ -3,6 +3,7 @@ graph LR
     Protocole --> Réseau
     TCP --> Protocole
     IP --> TCP
+    IP --> Protocole
     HTTP --> Protocole
     Requête --> HTTP
     Réponse --> HTTP
@@ -13,13 +14,13 @@ graph LR
     Sécurité --> Équipement
     Pare-feu --> Sécurité
 
-    Léger --> Client
-    Navigateur[Navigateur web] --> Léger
-    Lourd --> Client
-    Logiciel --> Lourd
+    Navigateur[Navigateur web] --> Client
+    Logiciel --> Client
+    Client --> Réseau
 
     Frontal[Serveur web] --> Serveur
     BDD[Serveur de base de données] --> Serveur
     Cache[Serveur cache] --> Serveur
+    Serveur --> Réseau
 
 ```

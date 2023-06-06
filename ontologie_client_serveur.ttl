@@ -1,16 +1,66 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix : <>.
-:IPv4 :est_une_implementation_32bits :IP .
-:IPv6 :est_une_implementation_64bits :IP .
-:IP :se_base :TCP .
-:TCP rdf:type :Protocole .
+@prefix cli_ser: <http://example.com/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 
-:GET :est_un_verbe :Requête .
-:POST :est_un_verbe :Requête .
-:Requête :est_émise :HTTP .
-:HTTP rdf:type :Protocole .
-:200 :est_un_code_retour :Réponse .
-:404 :est_un_code_retour :Réponse .
-:Réponse :est_retournée :HTTP .
+cli_ser:IPv4 a cli_ser:IP .
+cli_ser:IPv6 a cli_ser:IP .
+cli_ser:IP cli_ser:se_base cli_ser:TCP ;
+    rdfs:subClassOf cli_ser:Protocole .
+cli_ser:TCP rdfs:subClassOf cli_ser:Protocole .
 
-:Protocole :utilise :Réseau
+cli_ser:GET cli_ser:est_un_verbe cli_ser:Requete .
+cli_ser:POST cli_ser:est_un_verbe cli_ser:Requete .
+cli_ser:Requete cli_ser:est_emise cli_ser:HTTP .
+cli_ser:HTTP rdfs:subClassOf cli_ser:Protocole .
+
+cli_ser:Code rdfs:subPropertyOf cli_ser:est_un_code_retour .
+
+cli_ser:200 cli_ser:est_un_code_retour cli_ser:Reponse ;
+    cli_ser:Message "OK"^^xsd:string .
+cli_ser:404 cli_ser:est_un_code_retour cli_ser:Reponse ;
+    cli_ser:Message "Not found"^^xsd:string .
+cli_ser:Reponse cli_ser:est_retournee cli_ser:HTTP .
+
+cli_ser:Protocole cli_ser:utilise cli_ser:Reseau .
+
+cli_ser:Switch cli_ser:est_charge cli_ser:Routage .
+cli_ser:Pare-feu cli_ser:est_charge cli_ser:Securite .
+cli_ser:Routage rdfs:subClassOf cli_ser:Equipement .
+cli_ser:Securite rdfs:subClassOf cli_ser:Equipement .
+cli_ser:Equipement cli_ser:est_connecte cli_ser:Reseau .
+
+cli_ser:Chrome a cli_ser:NavigateurWeb ;
+    cli_ser:version "114.0.5735.61"^^xsd:string .
+cli_ser:Firefox a cli_ser:NavigateurWeb ;
+    cli_ser:version "112.0.1"^^xsd:string .
+cli_ser:NavigateurWeb rdfs:subClassOf cli_ser:Client .
+cli_ser:Logiciel rdfs:subClassOf cli_ser:Client .
+cli_ser:Client cli_ser:est_connecte cli_ser:Reseau .
+
+cli_ser:IIS a cli_ser:ServeurWeb ;
+    cli_ser:version "10.0"^^xsd:string .
+cli_ser:Nginx a cli_ser:ServeurWeb ;
+    cli_ser:version "1.23.4"^^xsd:string .
+cli_ser:ServeurWeb rdfs:subClassOf cli_ser:Serveur .
+cli_ser:MySQL a cli_ser:ServeurBDD ;
+    cli_ser:version "8.0.33"^^xsd:string .
+cli_ser:SQLServer a cli_ser:ServeurBDD ;
+    cli_ser:version "16.0.4035.4"^^xsd:string .
+cli_ser:ServeurBDD rdfs:subClassOf cli_ser:Serveur .
+cli_ser:Redis a cli_ser:ServeurCache ;
+    cli_ser:version "7.0"^^xsd:string .
+cli_ser:Memcached a cli_ser:ServeurCache ;
+    cli_ser:version "1.6.20"^^xsd:string .
+cli_ser:ServeurCache rdfs:subClassOf cli_ser:Serveur .
+
+cli_ser:Serveur cli_ser:est_connecte cli_ser:Reseau .
+
+cli_ser:est_connecte rdfs:domain cli_ser:Equipement, cli_ser:Client, cli_ser:Serveur ;
+    rdfs:range cli_ser:Reseau .
+cli_ser:lie_a_une_RFC rdfs:domain cli_ser:Protocole ;
+    rdfs:range xsd:string .
+cli_ser:version rdfs:domain cli_ser:Serveur, cli_ser:Client ;
+    rdfs:range xsd:string .
+cli_ser:a_un_nom_hote rdfs:domain cli_ser:Serveur ;
+    rdfs:range xsd:string .

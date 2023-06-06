@@ -2,7 +2,8 @@
 graph LR
     Protocole -- utilise --> Réseau
     TCP -- est_un_type --> Protocole
-    IP -- se_base --> TCP
+    IP -- peut_utiliser --> TCP
+    IP -- est_un_type --> Protocole
     IPv4 -- est_une_implémentation_32bits --> IP
     IPv6 -- est_une_implémentation_64bits --> IP
     HTTP -- est_un_type --> Protocole
