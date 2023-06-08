@@ -3,29 +3,24 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 
-cli_ser:IPv4 a cli_ser:IP .
 cli_ser:IPv6 a cli_ser:IP .
 cli_ser:IP cli_ser:se_base cli_ser:TCP ;
     rdfs:subClassOf cli_ser:Protocole .
 cli_ser:TCP rdfs:subClassOf cli_ser:Protocole .
 
-cli_ser:GET cli_ser:est_un_verbe cli_ser:Requete .
-cli_ser:POST cli_ser:est_un_verbe cli_ser:Requete .
+cli_ser:GET a cli_ser:Requete .
+cli_ser:POST a cli_ser:Requete .
 cli_ser:Requete cli_ser:est_emise cli_ser:HTTP .
 cli_ser:HTTP rdfs:subClassOf cli_ser:Protocole .
 
-cli_ser:Code rdfs:subPropertyOf cli_ser:est_un_code_retour .
-
-cli_ser:200 cli_ser:est_un_code_retour cli_ser:Reponse ;
-    cli_ser:Message "OK"^^xsd:string .
-cli_ser:404 cli_ser:est_un_code_retour cli_ser:Reponse ;
-    cli_ser:Message "Not found"^^xsd:string .
+cli_ser:OK a cli_ser:Reponse .
+cli_ser:NotFound a cli_ser:Reponse .
 cli_ser:Reponse cli_ser:est_retournee cli_ser:HTTP .
 
-cli_ser:Protocole cli_ser:utilise cli_ser:Reseau .
+cli_ser:Protocole cli_ser:est_transportee_sur cli_ser:Reseau .
 
-cli_ser:Switch cli_ser:est_charge cli_ser:Routage .
-cli_ser:Pare-feu cli_ser:est_charge cli_ser:Securite .
+cli_ser:Switch cli_ser:est_responsable cli_ser:Routage .
+cli_ser:Pare-feu cli_ser:est_responsable cli_ser:Securite .
 cli_ser:Routage rdfs:subClassOf cli_ser:Equipement .
 cli_ser:Securite rdfs:subClassOf cli_ser:Equipement .
 cli_ser:Equipement cli_ser:est_connecte cli_ser:Reseau .
@@ -56,7 +51,17 @@ cli_ser:ServeurCache rdfs:subClassOf cli_ser:Serveur .
 
 cli_ser:Serveur cli_ser:est_connecte cli_ser:Reseau .
 
+cli_ser:est_retournee rdfs:domain cli_ser:Reponse ;
+    rdfs:subPropertyOf cli_ser:a_un_code ;
+    rdfs:range xsd:integer . 
+cli_ser:est_responsable rdfs:domain cli_ser:Routage, cli_ser:Securite ;
+    rdfs:subPropertyOf cli_ser:a_des_regles ;
+    rdfs:range xsd:string .
+cli_ser:est_transportee_sur rdfs:domain cli_ser:Routage, cli_ser:Securite ;
+    rdfs:subPropertyOf cli_ser:a_des_regles ;
+    rdfs:range xsd:string .
 cli_ser:est_connecte rdfs:domain cli_ser:Equipement, cli_ser:Client, cli_ser:Serveur ;
+    rdfs:subPropertyOf cli_ser:a_une_adresse_IP ;
     rdfs:range cli_ser:Reseau .
 cli_ser:lie_a_une_RFC rdfs:domain cli_ser:Protocole ;
     rdfs:range xsd:string .
