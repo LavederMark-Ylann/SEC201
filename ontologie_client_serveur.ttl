@@ -3,21 +3,21 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 
-cli_ser:IPv6 a cli_ser:IP .
+cli_ser:IPv6 rdf:type cli_ser:IP .
 cli_ser:IP cli_ser:se_base cli_ser:TCP ;
     rdfs:subClassOf cli_ser:Protocole .
 cli_ser:TCP rdfs:subClassOf cli_ser:Protocole .
 
-cli_ser:GET a cli_ser:Requete .
-cli_ser:POST a cli_ser:Requete .
+cli_ser:GET rdf:type cli_ser:Requete .
+cli_ser:POST rdf:type cli_ser:Requete .
 cli_ser:Requete cli_ser:est_emise cli_ser:HTTP .
 cli_ser:HTTP rdfs:subClassOf cli_ser:Protocole .
 
-cli_ser:OK a cli_ser:Reponse .
-cli_ser:NotFound a cli_ser:Reponse .
+cli_ser:OK rdf:type cli_ser:Reponse .
+cli_ser:NotFound rdf:type cli_ser:Reponse .
 cli_ser:Reponse cli_ser:est_retournee cli_ser:HTTP .
 
-cli_ser:Protocole cli_ser:est_transportee_sur cli_ser:Reseau .
+cli_ser:Protocole cli_ser:est_transporte_sur cli_ser:Reseau .
 
 cli_ser:Switch cli_ser:est_responsable cli_ser:Routage .
 cli_ser:Pare-feu cli_ser:est_responsable cli_ser:Securite .
@@ -25,47 +25,51 @@ cli_ser:Routage rdfs:subClassOf cli_ser:Equipement .
 cli_ser:Securite rdfs:subClassOf cli_ser:Equipement .
 cli_ser:Equipement cli_ser:est_connecte cli_ser:Reseau .
 
-cli_ser:Chrome a cli_ser:NavigateurWeb ;
+cli_ser:Chrome rdf:type cli_ser:NavigateurWeb ;
     cli_ser:version "114.0.5735.61"^^xsd:string .
-cli_ser:Firefox a cli_ser:NavigateurWeb ;
+cli_ser:Firefox rdf:type cli_ser:NavigateurWeb ;
     cli_ser:version "112.0.1"^^xsd:string .
 cli_ser:NavigateurWeb rdfs:subClassOf cli_ser:Client .
 cli_ser:Logiciel rdfs:subClassOf cli_ser:Client .
 cli_ser:Client cli_ser:est_connecte cli_ser:Reseau .
 
-cli_ser:IIS a cli_ser:ServeurWeb ;
+cli_ser:IIS rdf:type cli_ser:ServeurWeb ;
     cli_ser:version "10.0"^^xsd:string .
-cli_ser:Nginx a cli_ser:ServeurWeb ;
+cli_ser:Nginx rdf:type cli_ser:ServeurWeb ;
     cli_ser:version "1.23.4"^^xsd:string .
 cli_ser:ServeurWeb rdfs:subClassOf cli_ser:Serveur .
-cli_ser:MySQL a cli_ser:ServeurBDD ;
+cli_ser:MySQL rdf:type cli_ser:ServeurBDD ;
     cli_ser:version "8.0.33"^^xsd:string .
-cli_ser:SQLServer a cli_ser:ServeurBDD ;
+cli_ser:SQLServer rdf:type cli_ser:ServeurBDD ;
     cli_ser:version "16.0.4035.4"^^xsd:string .
 cli_ser:ServeurBDD rdfs:subClassOf cli_ser:Serveur .
-cli_ser:Redis a cli_ser:ServeurCache ;
+cli_ser:Redis rdf:type cli_ser:ServeurCache ;
     cli_ser:version "7.0"^^xsd:string .
-cli_ser:Memcached a cli_ser:ServeurCache ;
+cli_ser:Memcached rdf:type cli_ser:ServeurCache ;
     cli_ser:version "1.6.20"^^xsd:string .
 cli_ser:ServeurCache rdfs:subClassOf cli_ser:Serveur .
 
 cli_ser:Serveur cli_ser:est_connecte cli_ser:Reseau .
 
+cli_ser:a_un_verbe rdfs:domain cli_ser:Requete ;
+    rdfs:subPropertyOf cli_ser:est_emise ;
+    rdfs:range cli_ser:Requete . 
 cli_ser:est_retournee rdfs:domain cli_ser:Reponse ;
     rdfs:subPropertyOf cli_ser:a_un_code ;
-    rdfs:range xsd:integer . 
-cli_ser:est_responsable rdfs:domain cli_ser:Routage, cli_ser:Securite ;
-    rdfs:subPropertyOf cli_ser:a_des_regles ;
-    rdfs:range xsd:string .
-cli_ser:est_transportee_sur rdfs:domain cli_ser:Routage, cli_ser:Securite ;
-    rdfs:subPropertyOf cli_ser:a_des_regles ;
-    rdfs:range xsd:string .
-cli_ser:est_connecte rdfs:domain cli_ser:Equipement, cli_ser:Client, cli_ser:Serveur ;
+    rdfs:range cli_ser:Reponse . 
+cli_ser:a_pour_fonction rdfs:domain cli_ser:Equipement ;
+    rdfs:range cli_ser:Fonction .
+cli_ser:a_des_regles rdfs:domain cli_ser:Securite ;
+    rdfs:subPropertyOf cli_ser:est_responsable ;
+    rdfs:range cli_ser:Routage .
+cli_ser:est_transporte_sur rdfs:domain cli_ser:Reseau ;
+    rdfs:range cli_ser:Protocole .
+cli_ser:est_connecte rdfs:domain cli_ser:Reseau ;
     rdfs:subPropertyOf cli_ser:a_une_adresse_IP ;
-    rdfs:range cli_ser:Reseau .
+    rdfs:range cli_ser:Client, cli_ser:Serveur, cli_ser:Equipement .
 cli_ser:lie_a_une_RFC rdfs:domain cli_ser:Protocole ;
-    rdfs:range xsd:string .
+    rdfs:range cli_ser:Protocole .
 cli_ser:version rdfs:domain cli_ser:Serveur, cli_ser:Client ;
-    rdfs:range xsd:string .
+    rdfs:range cli_ser:Serveur, cli_ser:Client .
 cli_ser:a_un_nom_hote rdfs:domain cli_ser:Serveur ;
-    rdfs:range xsd:string .
+    rdfs:range cli_ser:Serveur .

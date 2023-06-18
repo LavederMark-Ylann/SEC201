@@ -1,0 +1,123 @@
+\begin{tabular}{|p{0.450\textwidth}|p{0.450\textwidth}|}
+  \hline
+  \multicolumn{1}{|c|}{\textbf{\large{Requête}}} & \multicolumn{1}{|c|}{\textbf{\large{Résultat}}} \\
+  \hline
+  \multicolumn{2}{|c|}{\textbf{\large\makecell{Sélectionner les instances de ServeurWeb}}} \\
+  \hline
+
+  \begin{lstlisting}[style=codeStyle]
+SELECT ?serveurWeb 
+WHERE {
+    ?serveurWeb rdf:type <http://example.com/ServeurWeb>.
+}
+\end{lstlisting}
+
+&
+
+  \begin{lstlisting}[style=resultStyle]
+------------------------------
+| serveurWeb                 |
+==============================
+| <http://example.com/Nginx> |
+| <http://example.com/IIS>   |
+------------------------------
+\end{lstlisting} \\
+  \hline
+
+  \multicolumn{2}{|c|}{\textbf{\large\makecell{Décrire l'instance "Nginx"}}} \\
+  \hline
+  \begin{lstlisting}[style=codeStyle]
+DESCRIBE <http://example.com/Nginx>
+\end{lstlisting}
+
+&
+  \begin{lstlisting}[style=resultStyle]
+(graph
+ (triple <http://example.com/Nginx> rdf:type owl:NamedIndividual)
+ (triple <http://example.com/Nginx> rdf:type <http://example.com/ServeurWeb>)
+ (triple <http://example.com/Nginx> <http://example.com/version> "1.23.4")
+)
+\end{lstlisting} \\
+  \hline
+
+  \multicolumn{2}{|c|}{\textbf{\large\makecell{Demander s'il existe une instance de Client}}} \\
+  \hline
+  \begin{lstlisting}[style=codeStyle]
+ASK {
+    ?nav rdf:type <http://example.com/NavigateurWeb>.
+}
+\end{lstlisting}
+
+&
+
+  \begin{lstlisting}[style=resultStyle]
+yes
+\end{lstlisting} \\
+\hline
+
+\end{tabular}
+
+\newpage
+
+\begin{tabular}{|p{0.450\textwidth}|p{0.450\textwidth}|}
+
+  \hline
+  \multicolumn{2}{|c|}{\textbf{\large\makecell{Construire un graphe des ServeurWeb et leur version}}} \\
+  \hline
+  \begin{lstlisting}[style=codeStyle]
+CONSTRUCT {
+    ?serveurWeb <http://example.com/version> ?version.
+}
+WHERE {
+    ?serveurWeb <http://example.com/version> ?version .
+    ?serveurWeb rdf:type <http://example.com/ServeurWeb>.
+}
+\end{lstlisting}
+
+&
+
+  \begin{lstlisting}[style=resultStyle]
+(graph
+ (triple <http://example.com/Nginx> <http://example.com/version> "1.23.4")
+ (triple <http://example.com/IIS> <http://example.com/version> "2.34.5")
+)
+\end{lstlisting}
+  \\
+  \hline
+
+  \multicolumn{2}{|c|}{\textbf{\large\makecell{Insérer une nouvelle instance de ServeurWeb}}} \\
+  \hline
+  \begin{lstlisting}[style=codeStyle]
+INSERT DATA {
+    <http://example.com/Apache> rdf:type <http://example.com/ServeurWeb>.
+    <http://example.com/Apache> <http://example.com/version> "3.45.6".
+}
+\end{lstlisting}
+
+&
+
+  \begin{lstlisting}[style=resultStyle]
+  SPARQL update executed correctly
+  \end{lstlisting}
+
+  \\
+  \hline
+  \multicolumn{2}{|c|}{\textbf{\large\makecell{Supprimer une instance de ServeurWeb}}} \\
+  \hline
+  \begin{lstlisting}[style=codeStyle]
+DELETE {
+    <http://example.com/Apache> rdf:type <http://example.com/ServeurWeb>.
+}
+WHERE {
+    <http://example.com/Nginx> rdf:type <http://example.com/ServeurWeb>.
+}
+\end{lstlisting}
+
+&
+
+\begin{lstlisting}[style=resultStyle]
+  SPARQL update executed correctly
+  \end{lstlisting}
+  \\
+  \hline
+\end{tabular}

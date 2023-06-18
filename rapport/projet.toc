@@ -1,8 +1,0 @@
-\contentsline {section}{\numberline {1}Choix du domaine}{1}{}%
-\contentsline {section}{\numberline {2}Taxonomie}{1}{}%
-\contentsline {section}{\numberline {3}Ajout d'instances}{2}{}%
-\contentsline {subsection}{\numberline {3.1}Réseau}{2}{}%
-\contentsline {subsection}{\numberline {3.2}Client}{2}{}%
-\contentsline {subsection}{\numberline {3.3}Serveur}{2}{}%
-\contentsline {section}{\numberline {4}Ajout de prédicats}{2}{}%
-\contentsline {section}{\numberline {5}Changements additionnels}{3}{}%

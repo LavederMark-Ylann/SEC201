@@ -1,0 +1,330 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.w3.org/2002/07/owl#> .
+
+[ rdf:type owl:Ontology
+ ] .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://example.com/a_des_regles
+<http://example.com/a_des_regles> rdf:type owl:AnnotationProperty ;
+                                  rdfs:subPropertyOf <http://example.com/est_responsable> .
+
+
+###  http://example.com/a_un_code
+<http://example.com/a_un_code> rdf:type owl:AnnotationProperty .
+
+
+###  http://example.com/a_un_verbe
+<http://example.com/a_un_verbe> rdf:type owl:AnnotationProperty ;
+                                rdfs:subPropertyOf <http://example.com/est_emise> .
+
+
+###  http://example.com/a_une_adresse_IP
+<http://example.com/a_une_adresse_IP> rdf:type owl:AnnotationProperty .
+
+
+###  http://example.com/est_connecte
+<http://example.com/est_connecte> rdf:type owl:AnnotationProperty ;
+                                  rdfs:subPropertyOf <http://example.com/a_une_adresse_IP> .
+
+
+###  http://example.com/est_emise
+<http://example.com/est_emise> rdf:type owl:AnnotationProperty .
+
+
+###  http://example.com/est_responsable
+<http://example.com/est_responsable> rdf:type owl:AnnotationProperty .
+
+
+###  http://example.com/est_retournee
+<http://example.com/est_retournee> rdf:type owl:AnnotationProperty ;
+                                   rdfs:subPropertyOf <http://example.com/a_un_code> .
+
+
+###  http://example.com/se_base
+<http://example.com/se_base> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://example.com/a_des_regles
+<http://example.com/a_des_regles> rdf:type owl:ObjectProperty ;
+                                  rdfs:domain <http://example.com/Securite> ;
+                                  rdfs:range <http://example.com/Routage> .
+
+
+###  http://example.com/a_pour_fonction
+<http://example.com/a_pour_fonction> rdf:type owl:ObjectProperty ;
+                                     rdfs:domain <http://example.com/Equipement> ;
+                                     rdfs:range <http://example.com/Fonction> .
+
+
+###  http://example.com/a_un_nom_hote
+<http://example.com/a_un_nom_hote> rdf:type owl:ObjectProperty ;
+                                   rdfs:domain <http://example.com/Serveur> ;
+                                   rdfs:range <http://example.com/Serveur> .
+
+
+###  http://example.com/a_un_verbe
+<http://example.com/a_un_verbe> rdf:type owl:ObjectProperty ;
+                                rdfs:domain <http://example.com/Requete> ;
+                                rdfs:range <http://example.com/Requete> .
+
+
+###  http://example.com/est_connecte
+<http://example.com/est_connecte> rdf:type owl:ObjectProperty ;
+                                  rdfs:domain <http://example.com/Reseau> ;
+                                  rdfs:range <http://example.com/Client> ,
+                                             <http://example.com/Equipement> ,
+                                             <http://example.com/Serveur> .
+
+
+###  http://example.com/est_retournee
+<http://example.com/est_retournee> rdf:type owl:ObjectProperty ;
+                                   rdfs:domain <http://example.com/Reponse> ;
+                                   rdfs:range <http://example.com/Reponse> .
+
+
+###  http://example.com/est_transporte_sur
+<http://example.com/est_transporte_sur> rdf:type owl:ObjectProperty ;
+                                        rdfs:domain <http://example.com/Reseau> ;
+                                        rdfs:range <http://example.com/Protocole> .
+
+
+###  http://example.com/lie_a_une_RFC
+<http://example.com/lie_a_une_RFC> rdf:type owl:ObjectProperty ;
+                                   rdfs:domain <http://example.com/Protocole> ;
+                                   rdfs:range <http://example.com/Protocole> .
+
+
+###  http://example.com/version
+<http://example.com/version> rdf:type owl:ObjectProperty ;
+                             rdfs:domain <http://example.com/Client> ,
+                                         <http://example.com/Serveur> ;
+                             rdfs:range <http://example.com/Client> ,
+                                        <http://example.com/Serveur> .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://example.com/Client
+<http://example.com/Client> rdf:type owl:Class .
+
+
+###  http://example.com/Equipement
+<http://example.com/Equipement> rdf:type owl:Class .
+
+
+###  http://example.com/Fonction
+<http://example.com/Fonction> rdf:type owl:Class ;
+                              rdfs:subClassOf <http://example.com/Equipement> .
+
+
+###  http://example.com/HTTP
+<http://example.com/HTTP> rdf:type owl:Class ;
+                          rdfs:subClassOf <http://example.com/Protocole> .
+
+
+###  http://example.com/IP
+<http://example.com/IP> rdf:type owl:Class ;
+                        rdfs:subClassOf <http://example.com/Protocole> ;
+                        <http://example.com/se_base> <http://example.com/TCP> .
+
+
+###  http://example.com/Logiciel
+<http://example.com/Logiciel> rdf:type owl:Class ;
+                              rdfs:subClassOf <http://example.com/Client> .
+
+
+###  http://example.com/NavigateurWeb
+<http://example.com/NavigateurWeb> rdf:type owl:Class ;
+                                   rdfs:subClassOf <http://example.com/Client> .
+
+
+###  http://example.com/Protocole
+<http://example.com/Protocole> rdf:type owl:Class .
+
+
+###  http://example.com/Reponse
+<http://example.com/Reponse> rdf:type owl:Class ;
+                             rdfs:subClassOf <http://example.com/HTTP> .
+
+
+###  http://example.com/Requete
+<http://example.com/Requete> rdf:type owl:Class ;
+                             rdfs:subClassOf <http://example.com/HTTP> ;
+                             <http://example.com/est_emise> <http://example.com/HTTP> .
+
+
+###  http://example.com/Reseau
+<http://example.com/Reseau> rdf:type owl:Class .
+
+
+###  http://example.com/Routage
+<http://example.com/Routage> rdf:type owl:Class ;
+                             rdfs:subClassOf <http://example.com/Equipement> ,
+                                             <http://example.com/Fonction> .
+
+
+###  http://example.com/Securite
+<http://example.com/Securite> rdf:type owl:Class ;
+                              rdfs:subClassOf <http://example.com/Equipement> ,
+                                              <http://example.com/Fonction> .
+
+
+###  http://example.com/Serveur
+<http://example.com/Serveur> rdf:type owl:Class .
+
+
+###  http://example.com/ServeurBDD
+<http://example.com/ServeurBDD> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://example.com/Serveur> .
+
+
+###  http://example.com/ServeurCache
+<http://example.com/ServeurCache> rdf:type owl:Class ;
+                                  rdfs:subClassOf <http://example.com/Serveur> .
+
+
+###  http://example.com/ServeurWeb
+<http://example.com/ServeurWeb> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://example.com/Serveur> .
+
+
+###  http://example.com/TCP
+<http://example.com/TCP> rdf:type owl:Class ;
+                         rdfs:subClassOf <http://example.com/Protocole> .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://example.com/Chrome
+<http://example.com/Chrome> rdf:type owl:NamedIndividual ,
+                                     <http://example.com/NavigateurWeb> ;
+                            <http://example.com/version> "114.0.5735.61"^^xsd:string .
+
+
+###  http://example.com/Client
+<http://example.com/Client> rdf:type owl:NamedIndividual ;
+                            <http://example.com/est_connecte> <http://example.com/Reseau> .
+
+
+###  http://example.com/Equipement
+<http://example.com/Equipement> rdf:type owl:NamedIndividual ;
+                                <http://example.com/est_connecte> <http://example.com/Reseau> .
+
+
+###  http://example.com/Firefox
+<http://example.com/Firefox> rdf:type owl:NamedIndividual ,
+                                      <http://example.com/NavigateurWeb> ;
+                             <http://example.com/version> "112.0.1"^^xsd:string .
+
+
+###  http://example.com/GET
+<http://example.com/GET> rdf:type owl:NamedIndividual ,
+                                  <http://example.com/Requete> .
+
+
+###  http://example.com/HTTP
+<http://example.com/HTTP> rdf:type owl:NamedIndividual .
+
+
+###  http://example.com/IIS
+<http://example.com/IIS> rdf:type owl:NamedIndividual ,
+                                  <http://example.com/ServeurWeb> ;
+                         <http://example.com/version> "10.0"^^xsd:string .
+
+
+###  http://example.com/IPv6
+<http://example.com/IPv6> rdf:type owl:NamedIndividual ,
+                                   <http://example.com/IP> .
+
+
+###  http://example.com/Memcached
+<http://example.com/Memcached> rdf:type owl:NamedIndividual ,
+                                        <http://example.com/ServeurCache> ;
+                               <http://example.com/version> "1.6.20"^^xsd:string .
+
+
+###  http://example.com/MySQL
+<http://example.com/MySQL> rdf:type owl:NamedIndividual ,
+                                    <http://example.com/ServeurBDD> ;
+                           <http://example.com/version> "8.0.33"^^xsd:string .
+
+
+###  http://example.com/Nginx
+<http://example.com/Nginx> rdf:type owl:NamedIndividual ,
+                                    <http://example.com/ServeurWeb> ;
+                           <http://example.com/version> "1.23.4"^^xsd:string .
+
+
+###  http://example.com/NotFound
+<http://example.com/NotFound> rdf:type owl:NamedIndividual ,
+                                       <http://example.com/Reponse> .
+
+
+###  http://example.com/OK
+<http://example.com/OK> rdf:type owl:NamedIndividual ,
+                                 <http://example.com/Reponse> .
+
+
+###  http://example.com/POST
+<http://example.com/POST> rdf:type owl:NamedIndividual ,
+                                   <http://example.com/Requete> .
+
+
+###  http://example.com/Protocole
+<http://example.com/Protocole> rdf:type owl:NamedIndividual ;
+                               <http://example.com/est_transporte_sur> <http://example.com/Reseau> .
+
+
+###  http://example.com/Redis
+<http://example.com/Redis> rdf:type owl:NamedIndividual ,
+                                    <http://example.com/ServeurCache> ;
+                           <http://example.com/version> "7.0"^^xsd:string .
+
+
+###  http://example.com/Reponse
+<http://example.com/Reponse> rdf:type owl:NamedIndividual ;
+                             <http://example.com/est_retournee> <http://example.com/HTTP> .
+
+
+###  http://example.com/Reseau
+<http://example.com/Reseau> rdf:type owl:NamedIndividual .
+
+
+###  http://example.com/SQLServer
+<http://example.com/SQLServer> rdf:type owl:NamedIndividual ,
+                                        <http://example.com/ServeurBDD> ;
+                               <http://example.com/version> "16.0.4035.4"^^xsd:string .
+
+
+###  http://example.com/Serveur
+<http://example.com/Serveur> rdf:type owl:NamedIndividual ;
+                             <http://example.com/est_connecte> <http://example.com/Reseau> .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+<http://example.com/Pare-feu> <http://example.com/est_responsable> <http://example.com/Securite> .
+
+
+<http://example.com/Switch> <http://example.com/est_responsable> <http://example.com/Routage> .
+
+
+###  Generated by the OWL API (version 4.5.13) https://github.com/owlcs/owlapi

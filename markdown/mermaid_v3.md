@@ -15,10 +15,14 @@ graph LR
     404 -- est_un_code_de_retour --> Réponse
 
     Équipement -- est_connecté --> Réseau
-    Routage -- est_un_type --> Équipement
-    Switch -- est_chargé --> Routage
-    Sécurité -- est_un_type --> Équipement
-    Pare-feu -- est_chargé --> Sécurité
+    Switch -- est_un_type --> Équipement
+    
+    Switch -- a_pour_fonction --> Routage
+     
+    Pare-feu -- a_pour_fonction --> Sécurité
+    Pare-feu -- est_un_type --> Équipement
+    Sécurité -- est_un_type --> Fonction
+    Routage -- est_un_type --> Fonction
 
     Navigateur[Navigateur web] -- est_un_type --> Client
     Chrome -- est --> Navigateur

@@ -1,35 +1,72 @@
-\documentclass{article}
+\documentclass[a4paper,12pt,titlepage]{article}
+\usepackage[french]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{tocloft}
-\usepackage{verbatim}
-\usepackage{geometry}
+\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{float}
+\hypersetup{
+colorlinks=true,
+linkcolor=blue,
+filecolor=magenta,
+urlcolor=cyan,
+}
+
+% Configuration du bloc de code
+\lstdefinestyle{codeStyle}{
+  backgroundcolor=\color{lightgray!20},
+  basicstyle=\small\ttfamily,
+  breaklines=true,
+  keywordstyle=\color{blue},
+  language=SPARQL,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  commentstyle=\color{gray},
+  morecomment=[l]{\#}
+}
+
+\lstdefinestyle{resultStyle}{
+    backgroundcolor=\color{lightgray!20},
+    basicstyle=\small\ttfamily,
+    breaklines=true,
+    frame=single,
+    numberstyle=\tiny\color{gray},
+    commentstyle=\color{gray},
+}
 
 \geometry{a4paper, margin=2.5cm}
 
 \setlength{\parskip}{10pt}
 
-\title{Projet Knowledge Management}
+\title{Projet Knowledge Management \\ \begin{center}
+    \includegraphics[width=6cm]{../images/logo.png}
+\end{center}}
 
-\author{LAVEDER Mark-Ylann}
+\author{LAVEDER Mark-Ylann \\ \href{https://github.com/LavederMark-Ylann/SEC201}{Lien vers le dépôt GitHub}}
 
-\date{01/06/2022}
+\date{18/06/2022}
 
 \begin{document}
 
 \maketitle
 \thispagestyle{empty}
-
-
-\begin{center}
-    \includegraphics[width=6cm]{../images/logo.png}
-\end{center}
 \clearpage
 
 \renewcommand{\contentsname}{Sommaire}
 \tableofcontents
 \thispagestyle{empty}
 \clearpage
+
+\listoffigures
+\thispagestyle{empty}
+\clearpage
+
 
 \pagenumbering{arabic}
 \setcounter{page}{1}
@@ -41,11 +78,10 @@ Etant employé comme apprenti ingénieur DevOps, je suis amené à travailler et
 Le contexte de mon entreprise n'a pas été retenu et seules quelques technologies sont citées.
 
 \section{Taxonomie}
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth, height=\dimexpr\textheight-6.3cm\relax, keepaspectratio]{../images/mermaid_v1.png}
-    \caption{Taxonomie simplifiée d'une relation client-serveur}
-    \label{fig:Schéma de la taxonomie}
+    \includegraphics[width=\textwidth, height=\dimexpr\textheight-10cm\relax, keepaspectratio]{../images/mermaid_v1.png}
+    \caption{Taxonomie simplifiée d'une relation client-serveur}\label{fig:Schéma de la taxonomie}
 \end{figure}
 
 \section{Ajout d'instances}
@@ -70,21 +106,30 @@ Le contexte de mon entreprise n'a pas été retenu et seules quelques technologi
 \end{itemize}
 
 \section{Ajout de prédicats}
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{../images/mermaid_v2_sub.png}
-    \caption{Sous-graphe de la taxonomie simplifiée}
-    \label{fig:Sous-graphe référençant les prédicats}
+    \caption{Sous-graphe de la taxonomie simplifiée}\label{fig:Sous-graphe référençant les prédicats}
 \end{figure}
 
 \newpage
 \section{Changements additionnels}
 La représentation graphique de la taxonomie comporte des prédicats entre tous les noeuds.
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{../images/mermaid_v3.png}
-    \caption{Graphe de la taxonomie mis à jour}
-    \label{fig:Graphe de la taxonomie avec tous les prédicats}
+    \caption{Graphe de la taxonomie mis à jour}\label{fig:Graphe de la taxonomie avec tous les prédicats}
 \end{figure}
+
+Ecriture en Turtle de la taxonomie.
+
+Transformation des instances 200 et 404 en `OK` et 'Not Found' avec un lien `a un code retour'.
+
+Ajout d'un noeud Fonction, lié à Equipement et à ses sous-classes.
+
+\newpage
+\section{Requêtes SPARQL}
+
+\input{comparatif.tex}
 
 \end{document}
